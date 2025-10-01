@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="indevor.css">
+    <title>ANONA</title>
+</head>
+<body>
+<section class="container" id="contact" >
+	<form id="nl-form" class="nl-form flip">
+		<div id="content" class="back">
+			<div id="letter">
+				<div class="container">
+					<div class="flip">
+						<div class="front"></div>
+						<div class="back">
+							Dear <input type="text" value="ANONA" placeholder="Child's Name" data-subline="For example: <em>Jane</em> or <em>John</em>"/>,
+<BR></BR>
+								<!-- Ho Ho Ho!  Merry Christmas! The Elves and I are busy making presents for all of the good boys and girls around the world. You have been such a good -->
+									<select>
+									<option value="1" selected>A111</option>
+									<option value="2">boy</option>
+									<option value="3">girl</option>
+									</select>
+								<!-- this year, so I wanted to take a minute to write you a letter. -->
+						</div>
+					</div>
+				</div>
+
+
+				<!-- I’ve made my Naughty and Nice list, and I’ve checked it twice.  You are on my Nice List!  I am so happy that you have been such a good <select> -->
+				<!-- <option value="1" selected>boy/girl</option> -->
+				<!-- <option value="2">boy</option>
+				<option value="3">girl</option> -->
+				<!-- </select>  this year.  I heard from my secret messenger that you want <input type="text" value="" placeholder="What do they want for Christmas?" data-subline="For example: <em>a doll</em> or <em>some legos</em>"/> for Christmas this year.  Because you have been so good, the Elves and I have prepared a special present for you to open on Christmas Morning. -->
+				<br />
+				<br />
+
+				<!-- Can you do me a favor?  I want you to try really hard to <input type="text" value="" placeholder="Insert something that the child needs to work on" data-subline="For example: <em>get better grades</em> or <em>be nice to your sibling</em>"/>.  If you can do that for me, then I will be very happy and might bring you an extra treat on Christmas Morning. -->
+				<br />
+				<br />
+يالدو ياعز انسانه علي قلبي  هذا شي مره بسيط ابي ارجع مودك الطبيعي انا ديما جمبك يالعنود في المر قبل الحلو  لما تضايق راح اتضايق وراح اكون معك وقت ضيقتك لانك مو لحالك يالدو انا ديما جمبك واتمني الي سويته هذا يخفف عنك مو لازم تحكيلي الي مضيقك ولا تقولي شي بس انا جمبك حتى لو ما راح تحكيلي انا ديما معك 
+				<!-- By the time I get to your house in <input type="text" value="" placeholder="Insert the child's city" data-subline="For example: <em>Salt Lake City</em> or <em>London</em>"/>, I am going to be very hungry.  Would you leave some cookies and milk out for me?  Chocolate Chip cookies are my favorite, but I love all kinds of cookies!  Well I need to get back to my workshop and help the Elves. Keep up the good work <input type="text" value="" placeholder="Child's name" data-subline="For example: <em>Jane</em> or <em>John</em>"/> and have a Very Merry Christmas! -->
+				<br />
+				<br />
+				A111,
+				<br />
+				<br />
+				IDRAGON
+
+				<div class="nl-submit-wrap">
+					<a id="close" class="nl-submit" type="submit" href="#">Submit Letter</a>
+				</div>
+
+			</div>
+
+			<div id="top">
+				<a id="flip" href="#contact">send</a>
+			</div>
+			<div id="lid" class="container">
+				<div class="flip">
+					<div class="back"></div>
+					<div class="front">
+						<a id="open" href="#content" class="seal ss-social-regular">
+<span class="embossed">SC</span>
+</a>
+					</div>
+					<div class="back"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="front">
+			<h2>Thank You !</h2>
+			<p>A111 best code</p>
+			<a id="flip2back" href="#">See the back</a>
+		</div>
+		<div class="nl-overlay"></div>
+	</form>
+</section>
+<section class="enter">
+ <a href="heart.html">
+    <button>
+        Enter 
+    </button>
+ </a>
+</section>
+<section>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="clouds"></div>
+</section>
+<script>
+    /**
+ * nlform.js v1.0.0
+ * http://www.codrops.com
+ *
+ * Licensed under the MIT license.
+ * https://www.opensource.org/licenses/mit-license.php
+ *
+ * Copyright 2013, Codrops
+ * http://www.codrops.com
+ */
+;( function( window ) {
+
+	'use strict';
+
+	var document = window.document;
+
+	if (!String.prototype.trim) {
+		String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+	}
+
+	function NLForm( el, elClass ) {
+		this.el = el;
+		this.overlay = this.el.querySelector( '.nl-overlay' );
+		this.elClass = (elClass !== undefined) ? '.' + elClass : '';
+		this.fields = [];
+		this.fldOpen = -1;
+		this._init();
+	}
+
+	NLForm.prototype = {
+		_init : function() {
+			var self = this;
+			Array.prototype.slice.call( this.el.querySelectorAll( 'select' + self.elClass ) ).forEach( function( el, i ) {
+				self.fldOpen++;
+				self.fields.push( new NLField( self, el, 'dropdown', self.fldOpen ) );
+			} );
+			Array.prototype.slice.call( this.el.querySelectorAll( 'input' + self.elClass + ':not([type="hidden"]):not([type="submit"])' ) ).forEach( function( el, i ) {
+				self.fldOpen++;
+				self.fields.push( new NLField( self, el, 'input', self.fldOpen ) );
+			} );
+			this.overlay.addEventListener( 'click', function(ev) { self._closeFlds(); } );
+			this.overlay.addEventListener( 'touchstart', function(ev) { self._closeFlds(); } );
+		},
+		_closeFlds : function() {
+			if( this.fldOpen !== -1 ) {
+				this.fields[ this.fldOpen ].close();
+			}
+		}
+	};
+
+	function NLField( form, el, type, idx ) {
+		var parsed = el.getAttribute('data-parsed');
+		if (parsed != 1) {
+			el.setAttribute('data-parsed', 1);
+			this.form = form;
+			this.elOriginal = el;
+			this.pos = idx;
+			this.type = type;
+			this._create();
+			this._initEvents();
+		}
+	}
+
+	NLField.prototype = {
+		_create : function() {
+			if( this.type === 'dropdown' ) {
+				this._createDropDown();
+			}
+			else if( this.type === 'input' ) {
+				this._createInput();
+			}
+		},
+		_createDropDown : function() {
+			var self = this;
+			this.fld = document.createElement( 'div' );
+			this.fld.className = 'nl-field nl-dd';
+			this.toggle = document.createElement( 'a' );
+			this.toggle.innerHTML = this.elOriginal.options[ this.elOriginal.selectedIndex ].innerHTML;
+			this.toggle.className = 'nl-field-toggle';
+			this.optionsList = document.createElement( 'ul' );
+			var ihtml = '';
+			Array.prototype.slice.call( this.elOriginal.querySelectorAll( 'option' ) ).forEach( function( el, i ) {
+				ihtml += self.elOriginal.selectedIndex === i ? '<li class="nl-dd-checked">' + el.innerHTML + '</li>' : '<li>' + el.innerHTML + '</li>';
+				// selected index value
+				if( self.elOriginal.selectedIndex === i ) {
+					self.selectedIdx = i;
+				}
+			} );
+			this.optionsList.innerHTML = ihtml;
+			this.fld.appendChild( this.toggle );
+			this.fld.appendChild( this.optionsList );
+			this.elOriginal.parentNode.insertBefore( this.fld, this.elOriginal );
+			this.elOriginal.style.display = 'none';
+		},
+		_createInput : function() {
+			var self = this;
+			this.fld = document.createElement( 'div' );
+			this.fld.className = 'nl-field nl-ti-text';
+			this.toggle = document.createElement( 'a' );
+			this.toggle.innerHTML = this.elOriginal.getAttribute('value')? this.elOriginal.getAttribute('value'): this.elOriginal.getAttribute('placeholder');
+			this.toggle.className = 'nl-field-toggle';
+			this.optionsList = document.createElement( 'ul' );
+			this.getinput = document.createElement( 'input' );
+			this.getinput.setAttribute( 'type', this.elOriginal.getAttribute('type')? this.elOriginal.getAttribute('type'): '');
+			this.getinput.setAttribute( 'placeholder', this.elOriginal.getAttribute( 'placeholder' ) );
+			this.getinput.setAttribute( 'value', this.elOriginal.getAttribute('value')? this.elOriginal.getAttribute('value'): '');
+			this.getinputWrapper = document.createElement( 'li' );
+			this.getinputWrapper.className = 'nl-ti-input';
+			this.inputsubmit = document.createElement( 'button' );
+			this.inputsubmit.className = 'nl-field-go';
+			this.inputsubmit.innerHTML = 'Go';
+			this.getinputWrapper.appendChild( this.getinput );
+			this.getinputWrapper.appendChild( this.inputsubmit );
+			this.example = document.createElement( 'li' );
+			this.example.className = 'nl-ti-example';
+			this.example.innerHTML = this.elOriginal.getAttribute( 'data-subline' );
+			this.optionsList.appendChild( this.getinputWrapper );
+			this.optionsList.appendChild( this.example );
+			this.fld.appendChild( this.toggle );
+			this.fld.appendChild( this.optionsList );
+			this.elOriginal.parentNode.insertBefore( this.fld, this.elOriginal );
+			this.elOriginal.style.display = 'none';
+		},
+		_initEvents : function() {
+			var self = this;
+			this.toggle.addEventListener( 'click', function( ev ) { ev.preventDefault(); ev.stopPropagation(); self._open(); } );
+			this.toggle.addEventListener( 'touchstart', function( ev ) { ev.preventDefault(); ev.stopPropagation(); self._open(); } );
+
+			if( this.type === 'dropdown' ) {
+				var opts = Array.prototype.slice.call( this.optionsList.querySelectorAll( 'li' ) );
+				opts.forEach( function( el, i ) {
+					el.addEventListener( 'click', function( ev ) { ev.preventDefault(); self.close( el, opts.indexOf( el ) ); } );
+					el.addEventListener( 'hover', function( ev ) { ev.preventDefault(); self.close( el, opts.indexOf( el ), true ); } );
+					el.addEventListener( 'touchstart', function( ev ) { ev.preventDefault(); self.close( el, opts.indexOf( el ) ); } );
+				} );
+			}
+			else if( this.type === 'input' ) {
+				this.getinput.addEventListener( 'keydown', function( ev ) {
+					if ( ev.keyCode == 13 ) {
+						self.close();
+					}
+				} );
+				this.inputsubmit.addEventListener( 'click', function( ev ) { ev.preventDefault(); self.close(); } );
+				this.inputsubmit.addEventListener( 'touchstart', function( ev ) { ev.preventDefault(); self.close(); } );
+			}
+
+		},
+		_open : function() {
+			if( this.open ) {
+				return false;
+			}
+			this.open = true;
+			this.form.fldOpen = this.pos;
+			var self = this;
+			this.fld.className += ' nl-field-open';
+			this._checkPosition()
+		},
+		_checkPosition: function() {
+			var ul = this.fld.querySelector('ul');
+			var left = this._getOffset(ul).left;
+
+			var windowWidth = document.documentElement.clientWidth
+				|| document.body.clientWidth;
+
+			if (windowWidth < left + ul.scrollWidth) {
+				var diff = windowWidth - (left + ul.scrollWidth);
+				ul.style.left = diff+'px';
+			}
+		},
+		_getOffset: function(el) {
+			var _x = 0;
+			var _y = 0;
+			while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+				_x += el.offsetLeft - el.scrollLeft;
+				_y += el.offsetTop - el.scrollTop;
+				el = el.offsetParent;
+			}
+			return { top: _y, left: _x };
+		},
+		close : function( opt, idx, flag ) {
+			if( !this.open ) {
+				return false;
+			}
+			if (!flag) {
+				this.open = false;
+				this.form.fldOpen = -1;
+				this.fld.className = this.fld.className.replace(/\b nl-field-open\b/,'');
+			}
+
+			if( this.type === 'dropdown' ) {
+				if( opt ) {
+					// remove class nl-dd-checked from previous option
+					var selectedopt = this.optionsList.children[ this.selectedIdx ];
+					selectedopt.className = '';
+					opt.className = 'nl-dd-checked';
+					this.toggle.innerHTML = opt.innerHTML;
+					// update selected index value
+					this.selectedIdx = idx;
+					// update original select element´s value
+					this.elOriginal.value = this.elOriginal.children[ this.selectedIdx ].value;
+					if ("createEvent" in document) {
+					    var evt = document.createEvent("HTMLEvents");
+					    evt.initEvent("change", false, true);
+					    this.elOriginal.dispatchEvent(evt);
+					}
+					else
+					    this.elOriginal.fireEvent("change");
+				}
+			}
+			else if( this.type === 'input' ) {
+				this.getinput.blur();
+				this.toggle.innerHTML = this.getinput.value.trim() !== '' ? this.getinput.value : this.getinput.getAttribute( 'placeholder' );
+				this.elOriginal.value = this.getinput.value;
+			}
+		}
+	};
+
+	// add to global namespace
+	window.NLForm = NLForm;
+} )( window );
+
+</script>
+</body>
+</html>
